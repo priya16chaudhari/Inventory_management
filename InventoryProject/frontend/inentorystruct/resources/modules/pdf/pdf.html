@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style type="text/css">
+ th
+ {
+  border: 2px solid black;
+  background-color:silver;
+  text-align: center;
+ }
+ td
+ {
+   border: 2px solid black;
+   text-align: center;
+ }
+ body
+ {
+  border: 2px solid black;
+  margin: 10px;
+ }
+</style>
+
+
+</head>
+<body>
+
+
+<div ng-controller="pdfCtrl">
+ <form class="w3-container">
+<div id="printSectionId">
+  <br>
+
+<div class="row">
+  <div class=" col-md-12" >
+    <div class="col-md-12" style="border:2px solid black;border-radius:5px">
+      <div class="col-md-3">
+      <img src="a.png" height="100" width="100" style="float:left;">
+  </div>
+   <div class="col-md-6">
+<center><h4><b>MILLENNIUM SEMICONDUCTORS</b></h4>
+  PLOT NO. C-21, OPP.OVIVO WATER SUPPLY COMPANY, MIDC CHAKAN
+    PUNE, 410501, Maharashtra, India
+      Contact No : +91-8888871445 Email ID : mamta@millenniumsemi.com 
+      </center> 
+   </div>
+    <div class="col-md-3">
+      <img src="a.png" height="100" width="100" style="float:right;">
+    </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<div class="row">
+   <div class=" col-md-12">
+    <div class="col-md-12" style="border:2px solid black;border-radius:5px;background-color:silver">
+      <center><h4><b>Invoice</b></h4></center> 
+    </div>
+   </div>
+</div>
+<br>
+
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="col-md-12" style="border:2px solid black;border-top-left-radius:5px;border-top-right-radius: 5px">
+      <div class="col-md-6">
+        <div class="col-md-3">Company Name</div>
+        <div class="col-md-9">: abcd</div>
+     
+  </div>
+      <div class="col-md-6">
+        <div class="col-md-3">Date</div>
+        <div class="col-md-9">: {{date | date:'yyyy-MM-dd'}} </div>
+      </div>
+    </div>
+
+      <div class="col-md-12" style="border:2px solid black;border-top:none;">
+      <div class="col-md-6">
+        <div class="col-md-3">Address</div>
+        <div class="col-md-9">: pune</div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="col-md-3"> I.No</div>
+        <div class="col-md-9">:1245</div>
+    
+      </div>
+      </div>
+
+    <div class="col-md-12" style="border:2px solid black;border-top:none;border-bottom-left-radius:5px;border-bottom-right-radius: 5px">
+      <div class="col-md-6">
+         <div class="col-md-3">GSTNO</div>
+         <div class="col-md-9">:4512</div>
+     
+  </div>
+    </div>
+    
+
+    <div class="col-md-12" style="border:2px solid black;border-top-left-radius:5px;border-top-right-radius: 5px;margin-top:20px"  ng-repeat="row in inventoryDetailsList">
+      <div class="col-md-6">
+          <div class="col-md-3">Name</div>
+          <div class="col-md-9">: {{row.customerName}}</div>
+     
+  </div>
+      <div class="col-md-6">
+        <div class="col-md-3">Contact</div>
+        <div class="col-md-3">: {{row.contactNumber}} </div>
+  </div>
+    </div>
+
+     <div class="col-md-12" style="border:2px solid black;border-top:none;" ng-repeat="row in inventoryDetailsList">
+      <div class="col-md-6">
+        <div class="col-md-3">Address</div>
+        <div class="col-md-9">: {{row.customerAddress}}</div>
+     
+  </div>
+      <div class="col-md-6">
+      <div class="col-md-3">Billing Address</div>
+        <div class="col-md-9">: {{row.billingAddress}}</div>
+     
+     
+  </div>
+    </div>
+<!-- 
+    <div class="col-md-12" style="border:2px solid black;border-top:none;border-bottom-left-radius:5px;border-bottom-right-radius: 5px" ng-repeat="row in inventoryDetailsList">
+      <div class="col-md-6">
+        <div class="col-md-3">Billing Address</div>
+        <div class="col-md-9">: {{row.billingAddress}}</div>
+     
+  </div>
+    </div> -->
+    
+  </div>
+</div>
+<br><br>
+
+<table style="border:2px solid black;width:100%;">
+  <tr>
+    <th>Sr. No</th>
+    <th>Product Name</th>
+    <th>Product Description</th>
+    <th>Quantity</th>
+    <th>Product HSN</th>
+       <th>Product Price</th>
+  </tr>
+
+  <tr ng-repeat="row in inventoryDetailsList1">
+ 
+
+
+   <td>{{$index+1}}</td>
+  <td>{{row.productName}}</td>
+<td>{{row.productSpecification}}</td>
+
+<td>{{row.productUnit}}</td>
+<td>{{row.productHSN}}</td>
+
+ <td>{{row.productPrice}}</td>
+
+
+  </tr>
+
+
+</table>
+<br>
+ 
+ <div class="col-md-12" style="margin-top: 44px;">
+ <div class="col-md-offset-1">
+    <img src="b.png" height="100" width="100" style="float:left;">
+</div>
+
+<div class="col-md-offset-10">
+    <img src="b.png" height="100" width="100" style="float:left;">
+</div>
+</div>
+
+</div>
+
+<center><button class="w3-button w3-black btn-lg" ng-click="printToCart('printSectionId')" style="margin-top:20px">Print</button></center>
+ </form>
+</div>
+
+</body>
+</html>

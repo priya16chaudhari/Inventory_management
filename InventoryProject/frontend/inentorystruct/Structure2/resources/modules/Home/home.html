@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 
+<style type="text/css">
+  md-input-container:not(.md-input-has-value) input:not(:focus), md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-ampm-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-day-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-hour-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-millisecond-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-minute-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-month-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-second-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-text, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-week-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-year-field {
+    color: #000000f0;
+}
+
+body
+{
+ 
+}
+
+
+
+
+
+.selectdemoSelectHeader {
+/ Please note: All these selectors are only applied to children of elements with the 'selectdemoSelectHeader' class / }
+.selectdemoSelectHeader .demo-header-searchbox {
+border: none;
+outline: none;
+height: 100%;
+width: 100%;
+padding: 0; }
+.selectdemoSelectHeader .demo-select-header {
+box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
+padding-left: 10.667px;
+height: 48px;
+cursor: pointer;
+position: relative;
+display: flex;
+align-items: center;
+width: auto; }
+.selectdemoSelectHeader md-content._md {
+max-height: 240px; }
+
+
+
+
+
+</style>
+
+</head>
+<body>
+
+<div ng-controller="homeCtrl as vm" ng-cloak="">
+           <form class="w3-container" id="validate" autocomplete="off">
+<div ng-cloak>
+  <md-content style="margin-top:40px;background-color:silver">
+    <md-tabs md-dynamic-height md-border-bottom >
+      <md-tab label="Customer" >
+        <md-content class="md-padding" style="background-image: linear-gradient( 109.6deg,  rgba(245,239,249,1) 30.1%, rgba(207,211,236,1) 100.2% );">
+      
+          <div class="container-fluid">
+      <div class="row centered-form">
+        <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-xs-10 col-sm-10 col-md-10 col-lg-10">
+          <div class="panel panel-primary">
+            <div class="panel-heading"> 
+              <h3><center> Customer </center></h3>
+            </div>
+            <div class="panel-body">
+               
+        <md-content class="md-padding">
+                
+
+                <div layout-gt-sm="row">
+                          
+              <md-input-container class="md-block" flex-gt-sm>
+                      <label>Customer Name</label>
+                    <input name="customerName" ng-model="customerobj.customerName">
+                  
+              </md-input-container>
+                  
+
+                    <div flex="5"></div>
+              <md-input-container class="md-block" flex-gt-sm>
+                      <label>Customer Address</label>
+                    <input name="customerAddress" ng-model="customerobj.customerAddress">
+              </md-input-container>
+              </div>
+
+              <div layout-gt-sm="row">
+              
+              <md-input-container class="md-block" flex-gt-sm>
+                      <label>Billing Address</label>
+                    <input name="billingAddress" ng-model="customerobj.billingAddress">
+                    
+              </md-input-container>
+            
+              <div flex="5"></div>
+              <md-input-container class="md-block" flex-gt-sm>
+                      <label>Contact Number</label>
+                    <input name="contactNumber" ng-model="customerobj.contactNumber">
+              </md-input-container>
+              </div>  
+
+
+<center>
+              <div layout-gt-sm="row">
+                                
+              <md-input-container class="md-block" flex-gt-sm>
+                    <button type="button" class="btn btn-primary"   ng-show="btnSave"  ng-click="inserDetailsCustomer(customerobj);resetdata();getListCustomer();">Save</button>
+              </md-input-container>
+<!-- 
+               <button class="w3-button w3-black"   ng-show="btnSave"  ng-click=" inserDetails(customerobj);resetdata();getList();">save</button> -->
+ 
+
+
+<!-- 
+   <button class="w3-button w3-black"ng-click="resetdata();">clear</button>
+
+  <button class="w3-button w3-black">cancel</button> -->
+
+            </div>
+
+            <div layout-gt-sm="row">
+               <md-input-container class="md-block" flex-gt-sm>
+  <button class="w3-button w3-black"   ng-show="btnUpdate" ng-click="initBtn();updateCustomer(customerobj);resetdata();getListCustomer();">update</button>
+      </md-input-container>
+            </div>
+            </center>
+
+
+             <div layout-gt-sm="row">
+                              <div flex="100">
+                               
+                                  <div class="panel panel-primary">
+                                    <div class="panel-heading" id="h2" style="background-image: linear-gradient( 91.9deg,  rgba(75,207,250,1) 6.3%, rgba(25,159,249,1) 98.9% );">
+                                      <h3><center>Customer Details</center></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                      <div class="table-responsive">
+
+
+                                        <table st-table="Detailtable" st-safe-src="customerDetailList" class="table table-hover" >
+       <thead>  
+                    <th>Sr.no</th>
+          <th>Customer Name</th>
+          <th>Customer Address</th>
+          <th>Billing Address </th>
+          <th>Contact Number</th>
+         <th>Action</th> 
+
+
+              </thead>
+        <tbody>
+  
+            <tr  ng-repeat="row in Detailtable|filter:search">
+               <td>{{$index+1}}</td>
+               <td>{{row.customerName}}</td>
+               <td>{{row.customerAddress}}</td>
+               <td>{{row.billingAddress}}</td>
+                <td>{{row.contactNumber}}</td>
+          
+               <td><button type="button" class="btn btn-primary btn-sm" ng-click="editCustomer(row.customerId);">
+         <!--  <span class="glyphicon glyphicon-pencil" ></span> --> Edit 
+        </button>
+
+         <button type="button" class="btn btn-primary btn-sm" ng-click="delete(row.customerId);">
+       <!--    <span class="glyphicon glyphicon-trash"></span>  -->Delete 
+        </button></td>
+
+              </tr>
+            </tbody>
+
+        </table>
+                              
+                                      </div>
+                                    </div>
+                                  </div>
+                               
+                              </div>
+                              </div>
+                          </md-content>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        </md-content>
+      </md-tab>
+      <md-tab label="Inventory">
+        <md-content class="md-padding" style="background-image: linear-gradient( 109.6deg,  rgba(245,239,249,1) 30.1%, rgba(207,211,236,1) 100.2% );">
+        <div class="container-fluid">
+      <div class="row centered-form">
+        <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-xs-10 col-sm-10 col-md-10 col-lg-10">
+          <div class="panel panel-primary">
+            <div class="panel-heading" > 
+              <h3><center> Inventory </center></h3>
+            </div>
+            <div class="panel-body">
+               
+        <md-content class="md-padding">
+                
+
+                <div layout-gt-sm="row">
+                          
+              <md-input-container class="md-block" flex-gt-sm>
+                      <label>Product Name</label>
+                    <input name="cdesc" ng-model="inventoryobj.productName">
+              </md-input-container>
+                  
+
+                    <div flex="5"></div>
+              <md-input-container class="md-block" flex-gt-sm>
+                      <label>Product Specification</label>
+                    <input name="cdesc" ng-model="inventoryobj.productSpecification">
+              </md-input-container>
+              </div>
+
+              <div layout-gt-sm="row">
+              
+              <md-input-container class="md-block" flex-gt-sm>
+                      <label>Quantity</label>
+                    <input name="contactno" ng-model="inventoryobj.productUnit">
+                    
+              </md-input-container>
+            
+              <div flex="5"></div>
+              <md-input-container class="md-block" flex-gt-sm>
+                      <label>HSN / SSN</label>
+                    <input name="website" ng-model="inventoryobj.productHSN">
+              </md-input-container>
+              </div> 
+
+               <div layout-gt-sm="row">
+                 <md-input-container class="md-block" flex-gt-sm="45">
+                      <label>Price</label>
+                    <input name="website" ng-model="inventoryobj.productPrice">
+              </md-input-container>
+               </div> 
+
+
+<center>
+              <div layout-gt-sm="row">
+                                
+              <md-input-container class="md-block" flex-gt-sm>
+                   <button type="button" class="btn btn-primary"   ng-show="btnSave1"  ng-click="inserDetails(inventoryobj);resetdata1();getList();">Save</button>
+              </md-input-container>
+
+            </div>
+
+
+              <div layout-gt-sm="row">
+               <md-input-container class="md-block" flex-gt-sm>
+  <button class="w3-button w3-black"   ng-show="btnUpdate1" ng-click="initBtn1();update1(inventoryobj);resetdata1();getList();">update</button>
+      </md-input-container>
+            </div>
+            </center>
+
+
+             <div layout-gt-sm="row">
+                              <div flex="100">
+                               
+                                  <div class="panel panel-primary">
+                                    <div class="panel-heading" id="h2" style="background-image: linear-gradient( 91.9deg,  rgba(75,207,250,1) 6.3%, rgba(25,159,249,1) 98.9% );">
+                                      <h3><center>Inventory Details</center></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                      <div class="table-responsive">
+ <table  st-table="Detailtable1" st-safe-src="inventoryDetailsList" class="table table-hover" >
+       <thead>  
+                    <th>Sr.no</th>
+          <th>Product Name</th>
+          <th>Product Specification</th>
+          <th>Quantity </th>
+          <th>HSN / SSN</th>
+          <th>Price</th>
+          <th>Action</th> 
+
+
+              </thead>
+        <tbody>
+  
+            <tr ng-repeat="row in Detailtable1|filter:search">
+                  <td>{{$index+1}}</td>
+
+                                                 
+
+                                                   <td>{{row.productName}}</td>
+                                              <td>{{row.productSpecification}}</td>
+
+                                                <td>{{row.productUnit}}</td>
+
+                                                  <td>{{row.productHSN}}</td>
+
+                                                    <td>{{row.productPrice}}</td>
+
+
+             
+               <td> <button type="button" class="btn btn-primary btn-sm" ng-click="editbtn();edit1(row.productId);">
+          <!-- <span class="glyphicon glyphicon-pencil"></span> --> Edit 
+        </button>
+
+         <button type="button" class="btn btn-primary btn-sm" ng-click="delete1(row.productId);">
+<!--           <span class="glyphicon glyphicon-trash"></span> --> Delete 
+        </button>
+
+          <!--   <button type="button" class="btn btn-primary btn-sm" ng-click="editbtn();edit1(row.productId);">
+          <span class="glyphicon glyphicon-lock"></span> Edit 
+        </button>
+ -->
+      </td>
+      
+              
+              </tr>
+            </tbody>
+
+        </table>
+                              
+                                      </div>
+                                    </div>
+                                  </div>
+                               
+                              </div>
+                              </div>
+                          </md-content>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        </md-content>
+      </md-tab>
+      <md-tab label="Invoice">
+        <md-content class="md-padding" style="background-image: linear-gradient( 109.6deg,  rgba(245,239,249,1) 30.1%, rgba(207,211,236,1) 100.2% );">
+           <div class="container-fluid">
+      <div class="row centered-form">
+        <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-xs-10 col-sm-10 col-md-10 col-lg-10">
+          <div class="panel panel-primary">
+            <div class="panel-heading" > 
+              <h3><center> Invoice </center></h3>
+            </div>
+            <div class="panel-body">
+               
+        <md-content class="md-padding">
+                
+
+                <div layout-gt-sm="row">
+                          
+                  <!--   <md-input-container class="md-block" style="margin-top:-2px" flex-gt-sm>
+<md-autocomplete
+md-no-cache="true"
+
+md-search-text="searchTextt" 
+
+
+md-items="inventoryobj in vm.getMatchess(searchTextt)"
+ 
+md-item-text="inventoryobj.mobNo"
+md-selected-item-change="asdd()"
+md-no-cache="true" 
+md-floating-label="Mobile Number"
+>
+<md-item-template >
+
+<span md-highlight-text="searchTextt" md-highlight-flags="^i" >{{inventoryobj.mobNo}} </span>
+</md-item-template>
+<md-not-found>
+No matches found.
+</md-not-found> 
+</md-autocomplete>
+</md-input-container> -->
+                   <md-input-container class="md-block" flex-gt-sm="45">
+                      <label>Mobile Number</label>
+                    <input name="contactNumber" ng-model="inventoryobj1.contactNumber"  ng-blur="getContactDetailMobile(inventoryobj1.contactNumber)">
+              </md-input-container>
+
+
+<div flex="5"></div>
+                  <!-- <md-input-container class="md-block" flex-gt-sm>
+           <label>Customer Name</label>
+          <md-select ng-model="inventoryobj.pp">
+            <md-option><em>Please Select</em></md-option>
+            <md-option ng-repeat="state in ctrl.states" ng-value="state.pp"
+                       ng-disabled="$index === 1">
+              {{state.pp}}
+            </md-option>
+          </md-select>
+        </md-input-container> -->
+
+
+             <md-input-container class="md-block" flex-gt-sm>
+<label>Customer Name</label>
+<md-select ng-model="inventoryobj8.pp1" ng-init="myVar1=true"   ng-change="getCutomerNames(inventoryobj8.pp1)"
+md-on-close="clearSearchTerm()"
+data-md-container-class="selectdemoSelectHeader"
+>
+<md-select-header class="demo-select-header">
+<input ng-model="searchTerm"
+type="search"
+placeholder="Search for a customerName.."
+class="demo-header-searchbox md-text" ng-keydown="$event.stopPropagation()">
+</md-select-header>
+<md-optgroup label="vegetables">
+<md-option ng-value="cname" ng-repeat="cname in customerDetailList |
+filter:searchTerm">{{cname.customerName}}</md-option>
+</md-optgroup>
+</md-select>
+</md-input-container>
+      <!--   <md-input-container class="md-block" flex-gt-sm>
+<label>Customer Name</label>
+<md-select ng-model="selectedVegetables"
+md-on-close="clearSearchTerm()"
+data-md-container-class="selectdemoSelectHeader"
+>
+<md-select-header class="demo-select-header">
+<input ng-model="searchTerm"
+type="search"
+placeholder="Search for a vegetable.."
+class="demo-header-searchbox md-text" ng-keydown="$event.stopPropagation()">
+</md-select-header>
+<md-optgroup label="vegetables">
+<md-option ng-value="vegetable" ng-repeat="vegetable in vegetables |
+filter:searchTerm">{{vegetable}}</md-option>
+</md-optgroup>
+</md-select>
+</md-input-container> -->
+
+              </div>
+
+
+<center>
+             <!--  <div layout-gt-sm="row">
+                                
+              <md-input-container class="md-block" flex-gt-sm>
+            <button type="button" class="btn btn-primary">Save</button>
+              </md-input-container>
+
+            </div> -->
+            </center>
+
+
+
+             <div layout-gt-sm="row" ng-show="showcustomer">
+                              <div flex="100">
+                               
+                                  <div class="panel panel-primary">
+                                    <div class="panel-heading" id="h2" style="background-image: linear-gradient( 91.9deg,  rgba(75,207,250,1) 6.3%, rgba(25,159,249,1) 98.9% );">
+                                      <h3><center>Customer Details</center></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                      <div class="table-responsive">
+
+
+                                        <table class="table table-hover" >
+       <thead>  
+                      <th>Sr.no</th>
+          <th>Customer Name</th>
+          <th>Customer Address</th>
+          <th>Billing Address </th>
+          <th>Contact Number</th>
+       <!--   <th>Action</th>  -->
+
+    
+
+
+              </thead>
+        <tbody>
+  
+            <tr  ng-repeat="row in customerDetailListnamewise|filter:search">
+                 <td>{{$index +1}}</td>
+               <td>{{row.customerName}}</td>
+               <td>{{row.customerAddress}}</td>
+               <td>{{row.billingAddress}}</td>
+                <td>{{row.contactNumber}}</td>
+        
+              </tr>
+            </tbody>
+
+        </table>
+                              
+                                      </div>
+                                    </div>
+                                  </div>
+                               
+                              </div>
+                              </div>
+
+
+
+             <div layout-gt-sm="row" ng-show="showmobile">
+                              <div flex="100">
+                               
+                                  <div class="panel panel-primary">
+                                    <div class="panel-heading" id="h2" style="background-image: linear-gradient( 91.9deg,  rgba(75,207,250,1) 6.3%, rgba(25,159,249,1) 98.9% );">
+                                      <h3><center>Customer Details</center></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                      <div class="table-responsive">
+
+
+                                        <table id="myTable" st-table="Detailtable3" st-safe-src="customerDetailMobile" class="table table-hover" >
+       <thead>  
+                      <th>Sr.no</th>
+          <th>Customer Name</th>
+          <th>Customer Address</th>
+          <th>Billing Address </th>
+          <th>Contact Number</th>
+       <!--   <th>Action</th>  -->
+
+    
+
+
+              </thead>
+        <tbody>
+  
+            <tr id="myre" ng-repeat="row in Detailtable3|filter:search">
+                 <td>{{$index +1}}</td>
+               <td>{{row.customerName}}</td>
+               <td>{{row.customerAddress}}</td>
+               <td>{{row.billingAddress}}</td>
+                <td>{{row.contactNumber}}</td>
+        
+              </tr>
+            </tbody>
+
+        </table>
+                              
+                                      </div>
+                                    </div>
+                                  </div>
+                               
+                              </div>
+                              </div>
+                              <div layout-gt-sm="row">
+                              <div flex="100">
+                               
+                                  <div class="panel panel-primary">
+                                    <div class="panel-heading" id="h2" >
+                                      <h3><center>Product Details</center></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                      <div class="table-responsive">
+
+
+                                        <table id="myTable" st-table="Detailtable" st-safe-src="getCom" class="table table-hover" >
+       <thead>  
+                    <th>Product Name</th>
+          <th>Product Specification</th>
+          <th>Product Unit</th>
+          <th>Product HSV </th>
+          <th>Product Price</th>
+          <th>Product Quantity</th>
+
+
+              </thead>
+        <tbody>
+  
+            <tr>
+               <td>  
+              
+
+             <md-input-container class="md-block" flex-gt-sm>
+<label>Product Name</label>
+<md-select ng-model="inventoryobj4.pp" ng-change="editss(pp)"
+md-on-close="clearSearchTerm()"
+data-md-container-class="selectdemoSelectHeader"
+>
+<md-select-header class="demo-select-header">
+<input ng-model="searchTerm"
+type="search"
+placeholder="Search for a vegetable.."
+class="demo-header-searchbox md-text" ng-keydown="$event.stopPropagation()">
+</md-select-header>
+<md-optgroup label="vegetables">
+<md-option ng-value="pname" ng-repeat="pname in productNamesLis |
+filter:searchTerm">{{pname.productName}}</md-option>
+</md-optgroup>
+</md-select>
+</md-input-container>
+
+
+
+                </td>
+              
+
+                <td>
+                 <div>{{inventoryobj6.productSpecification}}</div>
+               </td>
+               <td><div>{{inventoryobj6.productUnit}}</div></td>
+               <td><div>{{inventoryobj6.productHSN}}</div></td>
+               <td><div>{{inventoryobj6.productPrice}}</div></td>
+               <td>
+                  <md-input-container class="md-block" flex-gt-sm>
+                      <label>Product Quantity</label>
+                    <input name="cdesc" ng-model="inventoryobj6.qtty" ng-blur="cheackqty(inventoryobj6)">
+              </md-input-container>
+               </td>
+        
+              </tr>
+            </tbody>
+
+        </table>
+
+        <center>
+              <div layout-gt-sm="row">
+                                
+              <md-input-container class="md-block" flex-gt-sm>
+             <button type="button" ng-disabled="firstBtn"  data-toggle="modal" data-target="#myModal" class="btn btn-primary">Submit</button>
+              </md-input-container>
+
+            </div>
+            </center>
+                              
+                                      </div>
+                                    </div>
+                                  </div>
+                               
+                              </div>
+                              </div>
+                          </md-content>
+
+                        </div>
+
+                      </div>
+                       
+                    </div>
+                  </div>
+                </div>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <center><h4 class="modal-title">Details</h4></center>
+        </div>
+        <div class="modal-body">
+          <div id="printSectionId">
+  <br>
+
+<div class="row">
+  <div class=" col-md-12" >
+    <div class="col-md-12" style="border:2px solid black;border-radius:5px">
+      <div class="col-md-3">
+      <img src="logo.png" height="100" width="100" style="float:left;">
+  </div>
+   <div class="col-md-6">
+<center><h4><b>MILLENNIUM SEMICONDUCTORS</b></h4>
+  PLOT NO. C-21, OPP.OVIVO WATER SUPPLY COMPANY, MIDC CHAKAN
+    PUNE, 410501, Maharashtra, India
+      Contact No : +91-8888871445 Email ID : mamta@millenniumsemi.com 
+      </center> 
+   </div>
+    <div class="col-md-3">
+      <img src="logo.png" height="100" width="100" style="float:right;">
+    </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<div class="row">
+   <div class=" col-md-12">
+    <div class="col-md-12" style="border:2px solid black;border-radius:5px;background-color:silver">
+      <center><h4><b>Invoice</b></h4></center> 
+    </div>
+   </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="col-md-12" style="border:2px solid black;border-top-left-radius:5px;border-top-right-radius: 5px">
+      <div class="col-md-6">
+        <div class="col-md-3">Company Name</div>
+        <div class="col-md-9">: abcd</div>
+     
+  </div>
+      <div class="col-md-6">
+        <div class="col-md-3">Date</div>
+        <div class="col-md-9">: {{date | date:'yyyy-MM-dd'}} </div>
+      </div>
+    </div>
+
+      <div class="col-md-12" style="border:2px solid black;border-top:none;">
+      <div class="col-md-6">
+        <div class="col-md-3">Address</div>
+        <div class="col-md-9">: pune</div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="col-md-3"> I.No</div>
+        <div class="col-md-9">:1245</div>
+    
+      </div>
+      </div>
+
+    <div class="col-md-12" style="border:2px solid black;border-top:none;border-bottom-left-radius:5px;border-bottom-right-radius: 5px">
+      <div class="col-md-6">
+         <div class="col-md-3">GSTNO</div>
+         <div class="col-md-9">:4512</div>
+     
+  </div>
+    </div>
+    <!-- priya -->
+
+
+<div ng-show="showcustomer">
+    <div  class="col-md-12" style="border:2px solid black;border-top-left-radius:5px;border-top-right-radius: 5px;margin-top:20px" ng-repeat="row in customerDetailListnamewise">
+      <div class="col-md-6">
+          <div class="col-md-3">Name</div>
+          <div class="col-md-9">: {{row.customerName}}</div>
+     
+  </div>
+      <div class="col-md-6">
+        <div class="col-md-3">Contact</div>
+        <div class="col-md-3">: {{row.contactNumber}} </div>
+  </div>
+    </div>
+
+     <div class="col-md-12" style="border:2px solid black;border-top:none;" ng-repeat="row in customerDetailListnamewise">
+      <div class="col-md-6">
+        <div class="col-md-3">Address</div>
+        <div class="col-md-9">:{{row.customerAddress}}</div>
+     
+  </div>
+      <div class="col-md-6">
+      <div class="col-md-3">Billing Address</div>
+        <div class="col-md-9">:{{row.billingAddress}}</div>
+     
+     
+  </div>
+    </div>
+  </div>
+
+
+
+<div ng-show="showmobile">
+    <div  class="col-md-12" style="border:2px solid black;border-top-left-radius:5px;border-top-right-radius: 5px;margin-top:20px" ng-repeat="row in customerDetailMobile">
+      <div class="col-md-6">
+          <div class="col-md-3">Name</div>
+          <div class="col-md-9">: {{row.customerName}}</div>
+     
+  </div>
+      <div class="col-md-6">
+        <div class="col-md-3">Contact</div>
+        <div class="col-md-3">: {{row.contactNumber}} </div>
+  </div>
+    </div>
+
+     <div class="col-md-12" style="border:2px solid black;border-top:none;" ng-repeat="row in customerDetailMobile">
+      <div class="col-md-6">
+        <div class="col-md-3">Address</div>
+        <div class="col-md-9">:{{row.customerAddress}}</div>
+     
+  </div>
+      <div class="col-md-6">
+      <div class="col-md-3">Billing Address</div>
+        <div class="col-md-9">:{{row.billingAddress}}</div>
+     
+     
+  </div>
+    </div>
+  </div>
+<!-- 
+    <div class="col-md-12" style="border:2px solid black;border-top:none;border-bottom-left-radius:5px;border-bottom-right-radius: 5px" ng-repeat="row in inventoryDetailsList">
+      <div class="col-md-6">
+        <div class="col-md-3">Billing Address</div>
+        <div class="col-md-9">: {{row.billingAddress}}</div>
+     
+  </div>
+    </div> -->
+    
+  </div>
+</div>
+
+
+<br><br>
+
+<table style="border:2px solid black;width:100%;">
+  <tr>
+  <!--   <th>Sr. No</th> -->
+    <th>Product Name</th>
+    <th>Product Description</th>
+    <th>Quantity</th>
+    <th>Product HSN</th>
+       <th>Product Price</th>
+
+       <th>Total Price</th>
+  </tr>
+
+  <tr >
+ 
+
+
+ <!--   <td>{{$index+1}}</td> -->
+  <td>{{inventoryobj6.productName}}</td>
+<td>{{inventoryobj6.productSpecification}}</td>
+
+<td>{{inventoryobj6.qtty}}</td>
+<td>{{inventoryobj6.productHSN}}</td>
+
+ <td>{{inventoryobj6.productPrice}}</td>
+
+
+ <td>{{inventoryobj6.productPrice*inventoryobj6.qtty}}</td>
+
+  </tr>
+</table>
+<br>
+ 
+ <div class="col-md-12">
+ <div class="col-md-offset-1">
+    <img src="stamp.png" height="100" width="100" style="float:left;">
+</div>
+
+<div class="col-md-offset-10">
+    <img src="stamp.png" height="100" width="100" style="float:left;">
+</div>
+</div>
+
+</div>
+
+<center><button class="w3-button w3-black btn-lg" ng-init="myVar=true"  ng-click="next(inventoryobj6); printToCart('printSectionId')" style="margin-top:20px">Print</button></center>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </md-content>
+</div>
+</form>
+</div>
+
+</body>
+</html>
+

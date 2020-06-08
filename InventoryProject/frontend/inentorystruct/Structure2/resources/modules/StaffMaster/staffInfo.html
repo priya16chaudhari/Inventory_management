@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+/*body{
+    background-image: linear-gradient(to bottom right,#cc8800,#003366,#cc8800);
+    background-size: 10px;
+    height: 100px;
+    width: all;
+
+}*/
+
+  .heading {
+  position: absolute;
+  top: 0;
+
+ 
+  font-size: 40px;
+  text-align: center;
+  width: 100%;
+  margin-top: 20px; 
+}
+
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 2px solid grey;
+  text-align: left;
+  padding: 8px;
+ 
+}
+
+.fake-shadow {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+md-input-container:not(.md-input-has-value) input:not(:focus), md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-ampm-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-day-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-hour-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-millisecond-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-minute-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-month-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-second-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-text, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-week-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-year-field {
+    color: #000000f0;
+}
+
+</style>
+
+
+</head>
+<body>
+
+
+<div ng-controller="inventoryCtrl as vm" ng-cloak="">
+           <form class="w3-container" id="validate" autocomplete="off">
+
+                  <div class="panel panel-default">
+
+                            <div class="panel-heading w3-amber w3-center">Inventory Master</div>
+                                   <div class="panel-body">
+
+                                      <div class="row"></div>
+
+                                           <div class="row form-group">
+                                              <div class="col-md-12">
+                        
+
+                                            
+
+
+                                                      <div class="col-md-offset-1 col-md-3">
+                                                     <label>product Name</label>
+                                                      <input class="w3-input" type="text"  ng-model="inventoryobj.productName">
+                                                      </div>
+
+
+
+                                                     <div class="col-md-3">
+                                                    <label>productSpecification</label>
+                                                    <input class="w3-input" type="text" ng-model="inventoryobj.productSpecification">
+                                                    </div>
+
+
+                                                      <div class="col-md-3">
+                                                     <label>productUnit</label>
+                                                      <input class="w3-input" type="text"  ng-model="inventoryobj.productUnit">
+                                                      </div>
+
+
+
+                                                 </div>
+                           
+                          
+                                    </div>
+
+
+
+
+
+                                    <div class="row form-group">
+                                      
+                                      <div class="col-md-12">
+                                        
+
+                                                      <div class="col-md-offset-3 col-md-3">
+                                                     <label>productHSN</label>
+                                                      <input class="w3-input" type="text"  ng-model="inventoryobj.productHSN">
+                                                      </div>
+
+
+
+                                                      <div class="col-md-3">
+                                                     <label>productPrice</label>
+                                                      <input class="w3-input" type="text"  ng-model="inventoryobj.productPrice">
+                                                      </div>
+                           
+
+
+
+                                      </div>
+                                    </div>
+
+
+
+                                   </div>
+
+
+
+              <div class="panel-footer">
+
+     <div class="row">
+
+        <div class="col-md-offset-5 col-md-4 ">
+      
+  <button class="w3-button w3-black"   ng-show="btnSave"  ng-click=" inserDetails(inventoryobj);resetdata();getList();">save</button>
+
+  <button class="w3-button w3-black"   ng-show="btnUpdate" ng-click="initBtn();update(inventoryobj);resetdata();getList();">update</button>
+ 
+
+
+
+   <button class="w3-button w3-black">clear</button>
+
+  <button class="w3-button w3-black">cancel</button>
+
+
+</div>
+</div>
+    </div>
+
+
+
+
+
+                   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                  <div class="panel panel-default">
+
+                            <div class="panel-heading w3-amber w3-center">inventory Master Details</div>
+                                   <div class="panel-body">
+
+                                      <div class="row"></div>
+
+                                           <div class="row form-group">
+                                              <div class="col-md-12">
+                           
+
+
+                                                        <div class="table-responsive">
+              <table st-table="displayedCollection" st-safe-src="inventoryDetailsList" class="table datatable" class="table table-hover  table-striped " style="border: 1px solid black">
+                                          <thead>
+                                            <tr style="font-size: 18px;font-family: Times New Roman, Times, serif;">
+                                           <th>Sr.No</th>
+                                              <th>product Name</th>
+                                              <th>productSpecification</th>
+
+                                                <th>productUnit</th>
+
+                                                  <th>productHSN</th>
+
+                                                    <th>productPrice</th>
+
+
+
+
+                                              <th>Action</th>
+                                            </tr>
+                                             <tr>  
+                                              <th colspan="10"><input st-search="" class="form-control" placeholder="global Search"
+                                               type="text"></th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <tr ng-repeat="row in displayedCollection">
+                                                 <td>{{$index+1}}</td>
+
+                                                 
+
+                                                   <td>{{row.productName}}</td>
+                                              <td>{{row.productSpecification}}</td>
+
+                                                <td>{{row.productUnit}}</td>
+
+                                                  <td>{{row.productHSN}}</td>
+
+                                                    <td>{{row.productPrice}}</td>
+
+
+
+                                                 <!--  <td>{{row.username}}</td>
+                                                  <td>{{row.password}}</td>
+
+                                                  <td>{{row.examName}}</td>
+                                                  <td>{{row.sub}}</td>
+                                                  --> 
+
+                                                 
+                                                  
+
+                                                  <td><button type="button"  class="btn btn-sm btn-success" style="border-radius: 10px;" ng-click="editbtn();edit(row)">  <i class="glyphicon glyphicon-pencil">
+                                                  </i></button>
+
+
+                                                    <button type="button"  class="btn btn-sm btn-success" style="border-radius: 10px;" ng-click="deletebtn();delete(row.inventoryobjId);">  <i class="glyphicon glyphicon-pencil">
+                                                  </i></button>
+
+
+                                                        <!-- <button type="button"  class="btn btn-sm btn-success" style="border-radius: 10px;" ng-click="updatebtn();updatedetails(row.inventoryobjId);">  <i class="glyphicon glyphicon-pencil"> -->
+                                                  </i></button>
+
+                                                </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </div>
+
+
+
+                                              </div>
+                                    </div>
+                                </div>
+                </div>
+
+
+
+
+
+
+
+
+                  <div class="panel panel-default">
+
+                            <div class="panel-heading w3-amber w3-center">inventory Master Details</div>
+                                   <div class="panel-body">
+
+                                      <div class="row"></div>
+
+                                           <div class="row form-group">
+                                              <div class="col-md-12">
+                           
+
+
+                                                        <div class="table-responsive">
+              <table  class="table datatable" class="table table-hover  table-striped " style="border: 1px solid black" st-table="displayedCollection" st-safe-src="inventoryDetailsList">
+                                          <thead>
+                                            <tr style="font-size: 18px;font-family: Times New Roman, Times, serif;">
+                                           <th>Sr.No</th>
+                                              <th>product Name</th>
+                                              <th>productSpecification</th>
+
+                                                <th>productUnit</th>
+
+                                                  <th>productHSN</th>
+
+                                                    <th>productPrice</th>
+
+
+
+
+                                            <!--   <th>Action</th> -->
+                                            </tr>
+                                             <tr>  
+                                             <!--  <th colspan="10"><input st-search="" class="form-control" placeholder="global Search"
+                                               type="text"></th> -->
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <tr  >
+ <!--                                                 <td>
+<div angucomplete-alt id="ex1" placeholder="Select Nationality" selected-object="edit"
+  local-data="inventoryDetailsList"
+    search-fields="productName"
+    title-field="productName"
+    minlength="1"
+    inputclass="form-control form-control-small"
+    match-class="highlight" /></div></td> -->
+<td>
+      
+
+       <!--       <md-input-container class="md-block media11 media12" flex-gt-sm>
+             <label>Product Name</label>
+                              <md-select ng-model="inventoryobj.inventoryModel" ng-change="asd()" name="proName" required>
+                                 <md-option ng-repeat="status in bankList">{{status.bankName}}</md-option>
+                              </md-select>
+             </md-input-container> -->
+
+      <md-input-container class="md-block" flex-gt-sm>
+<md-autocomplete
+md-no-cache="true"
+md-selected-item="selectedItem"
+md-search-text="searchText" 
+
+
+md-items="bank in vm.getMatches(searchText)"
+ 
+md-item-text="bank.bankName"
+md-selected-item-change="asd()"
+md-no-cache="true" 
+md-floating-label="Select bank"
+>
+<md-item-template >
+
+<span md-highlight-text="searchText" md-highlight-flags="^i" >{{bank.bankName}} </span>
+</md-item-template>
+<md-not-found>
+No matches found.
+</md-not-found> 
+</md-autocomplete>
+</md-input-container>
+
+
+</td>
+                                                 
+                                                  
+
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </div>
+
+
+
+                                              </div>
+                                    </div>
+                                </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+             </form>
+</div>
+
+
+</body>
+</html>
